@@ -37,7 +37,6 @@ for j in range(60000):
     # in what direction is the target value?
     # were we really sure? if so, don't change too much.
     l2_delta = l2_error * nonlin(l2, deriv=True)
-
     # how much did each l1 value contribute to the l2 error (according to the weights)?
     l1_error = l2_delta.dot(syn1.T)
 

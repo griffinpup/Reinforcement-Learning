@@ -4,23 +4,24 @@ import cPickle as pickle
 import gym
 
 # hyperparameters
-H = 200  # number of hidden layer neurons
-batch_size = 3  # every how many episodes to do a param update?
-learning_rate = 1e-4
+neurons = 10  # number of hidden layer neurons
+batch_size = 30  # every how many episodes to do a param update?
+learning_rate = .6
 gamma = 0.99  # discount factor for reward
 decay_rate = 0.99  # decay factor for RMSProp leaky sum of grad^2
-resume = True  # resume from previous checkpoint?
+resume = False  # resume from previous checkpoint?
 render = False
 
 # model initialization
-D = 80 * 80  # input dimensionality: 80x80 grid
+env = gym.make("CartPole-v0")
+input_size = env.observation_space.high.shape[0]
 if resume:
     print("entered if")
     model = pickle.load(open('PongSave.p', 'rb'))
 else:
     model = {}
-    model['W1'] = np.random.randn(H, D) / np.sqrt(D)  # "Xavier" initialization
-    model['W2'] = np.random.randn(H) / np.sqrt(H)
+    model['W1'] = np.random.randn(neurons, input_size)  # "Xavier" initialization
+    model['W2'] = np.random.randn(neurons)
 
 grad_buffer = {k: np.zeros_like(v) for k, v in model.iteritems()}  # update buffers that add up gradients over a batch
 rmsprop_cache = {k: np.zeros_like(v) for k, v in model.iteritems()}  # rmsprop memory
@@ -42,12 +43,12 @@ def discount_rewards(r):
     discounted_r = np.zeros_like(r)
     running_add = 0
     for t in reversed(xrange(0, r.size)):
-        if r[t] != 0: running_add = 0  # reset the sum, since this was a game boundary (pong specific!)
+        if r[t] == 0:
+            running_add = 0  # reset the sum, since this was a game boundary (pong specific!)
         running_add = running_add * gamma + r[t]
         discounted_r[t] = running_add
     return discounted_r
 
-env = gym.make("Pong-v0")
 observation = env.reset()
 prev_x = None  # used in computing the difference frame
 processed_observation, hidden_states, gradient, rewards_in_episode = [], [], [], []
@@ -55,25 +56,24 @@ running_reward = None
 reward_sum = 0
 episode_number = 0
 while True:
-    if render:
+
+    if episode_number % 1000 == 0:
         env.render()
 
     # preprocess the observation, set input to network to be difference image
-    cur_x = prepro(observation)
-    x = cur_x - prev_x if prev_x is not None else np.zeros(D)
-    prev_x = cur_x
+    input = observation
 
     # forward the policy network and sample an action from the returned probability
-    hidden_state = np.dot(model['W1'], x)
+    hidden_state = np.dot(model['W1'], input)
     hidden_state[hidden_state < 0] = 0  # ReLU nonlinearity
     logp = np.dot(model['W2'], hidden_state)
     aprob = sigmoid(logp)
-    action = 2 if np.random.uniform() < aprob else 3  # roll the dice!
+    action = 0 if np.random.uniform() < aprob else 1  # roll the dice!
 
     # record various intermediates (needed later for backprop)
-    processed_observation.append(x)  # observation
+    processed_observation.append(input)  # observation
     hidden_states.append(hidden_state)  # hidden state
-    fake_label = 1 if action == 2 else 0  # a "fake label"
+    fake_label = 1 if action == 1 else 0  # a "fake label"
     gradient.append(
         fake_label - aprob)  # grad that encourages the action that was taken to be taken (see http://cs231n.github.io/neural-networks-2/#losses if confused)
 
@@ -113,13 +113,13 @@ while True:
             for k, v in model.iteritems():
                 g = grad_buffer[k]  # gradient
                 rmsprop_cache[k] = decay_rate * rmsprop_cache[k] + (1 - decay_rate) * g ** 2
-                model[k] += learning_rate * g / (np.sqrt(rmsprop_cache[k]) + 1e-5)
+                model[k] -= learning_rate * g / (np.sqrt(rmsprop_cache[k]) + 1e-5)
                 grad_buffer[k] = np.zeros_like(v)  # reset batch gradient buffer
 
         # boring book-keeping
         running_reward = reward_sum if running_reward is None else running_reward * 0.99 + reward_sum * 0.01
-        print 'resetting env. episode reward total was %f. running mean: %f' % (reward_sum, running_reward)
         if episode_number % 100 == 0:
+            print 'resetting env. episode reward total was %f. running mean: %f' % (reward_sum, running_reward)
             pickle.dump(model, open('PongSave.p', 'wb'))
             print('saving')
         reward_sum = 0

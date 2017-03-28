@@ -19,27 +19,35 @@ def backpropogate(gradient, layer, rms_layer):
     layer += new_gradient
     return rms_layer, layer
 
+
 def get_test_obs(action, given_input):
-    obs = random.randint(0,1)
-    reward = 0
-    if action == given_input:
-        reward = 1
+    obs = random.randint(0,10)
+    reward = action-given_input
 
     return float(obs), reward, True, "garbage"
+
+def test_reset():
+    return float(random.randint(0,10))
+
+def test_backpropogate(gradient, layer, rms_layer):
+    layer += gradient
+    return layer
+
 
 #initialized the environment and prints pertinent info
 env = gym.make("CartPole-v0")
 print(env.action_space)
 print(env.observation_space)
-print(gym.envs.registry.all())
 
 #Parameters
-batch_size = 100
+batch_size = 30
 node_count = 2
 decay_rate = .99
 learning_rate = .001
 output_size = env.action_space.n
 input_size = env.observation_space.high.shape[0]
+output_size = 1
+input_size = 1
 
 #The two neuron layers,
 # INPUTxNODE_COUNT
@@ -52,8 +60,9 @@ rmsprop_l2 = np.zeros_like(layer2)
 rmsprop_l1 = np.zeros_like(layer1)
 
 #
-observation = env.reset()
-observation = np.array(observation)
+#observation = env.reset()
+observation = test_reset()
+#observation = np.array(observation)
 
 #Initialize batch level lists
 batch_rewards = []
@@ -77,13 +86,14 @@ while True:
     l2 = sigmoid(np.dot(l1, layer2))
 
     #choose the action based on the neuron's output.
-    if l2 > .5:
-        action = 1
-    else:
-        action = 0
+    action = l2
+
+    print "Observation: " + str(observation)
+    print "Action: " + str(l2)
 
     #Play the game
-    observation, reward, done, info = env.step(action)
+    #observation, reward, done, info = env.step(action)
+    observation, reward, done, info = get_test_obs(action, observation)
 
     #if episode_count % 100 == 0:
         #env.render()
@@ -101,12 +111,13 @@ while True:
 
     #If the game is ended
     if done:
-        print total_reward
+        #print total_reward
         #Stacks all of the data to make it more manageable
         error = np.vstack(error)
         l1_output = np.vstack(l1_output)
         l2_output = np.vstack(l2_output)
         inputs = np.vstack(inputs)
+        print "Error: " + str(error)
 
         episode_count += 1
 
@@ -137,6 +148,7 @@ while True:
             batch_rewards = np.ndarray.astype(batch_rewards, float)
             batch_rewards -= np.mean(batch_rewards)
 
+            print "Batch Errors" + str(batch_errors)
             #Iterate through every award
             for index, reward in enumerate(batch_rewards):
                 #Multiply a discounted reward through the length of the game
@@ -147,12 +159,18 @@ while True:
                 #calculate the gradient for the second layer
                 #ITERATIONSx1:  the error * the slope
                 l2_delta = batch_errors[index] * sigmoid(batch_l2_output[index], deriv=True)
+                #print "sigmoid(batch_l2_output[index], deriv=True)" + str(sigmoid(batch_l2_output[index], deriv=True))
+                #print "batch_errors[index]" + str(batch_errors[index])
+                #print "l2_delta" + str(l2_delta)
                 #Multiplies the delta by layer 2's input
                 #NODE_COUNTxOUTPUT
                 final_gradient_l2 = l2_delta.T.dot(batch_l1_output[index])
                 final_gradient_l2 = final_gradient_l2.T
+                #print "Final Gradient l2" + str(final_gradient_l2)
                 #Updates layer2 and RMS memory
-                rmsprop_l2, layer2 = backpropogate(final_gradient_l2, layer2, rmsprop_l2)
+                #rmsprop_l2, layer2 = backpropogate(final_gradient_l2, layer2, rmsprop_l2)
+
+                layer2 = test_backpropogate(final_gradient_l2, layer2, 10)
 
                 #rmsprop_l2 = decay_rate * rmsprop_l2 + (1-decay_rate) * final_gradient_l2 ** 2
                 #layer2 += learning_rate * final_gradient_l2 / (np.sqrt(rmsprop_l2) + 1e-4)
@@ -168,7 +186,10 @@ while True:
                 final_gradient_l1 = final_gradient_l1.T
                 #Updates layer1 and RMS memory
                 #rmsprop_l1, layer1 = backpropogate(final_gradient_l1, layer1, rmsprop_l1)
-                layer1 += final_gradient_l1
+                layer1 = test_backpropogate(final_gradient_l1, layer1, 10)
+                #layer1 += final_gradient_l1
+
+                print
 
             #reset containers
             batch_rewards = []

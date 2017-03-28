@@ -17,10 +17,13 @@ def find_SD(index, list):
     return np.std(coll)
 
 
-env = gym.make("Acrobot-v1")
+env = gym.make("Pendulum-v0")
 #env = wrappers.Monitor(env, '/tmp/mountaincar-cross-entropy-1',force=True)
 
-output_size = env.action_space.n
+print env.action_space
+print env.observation_space
+
+output_size = env.action_space.high.shape[0]
 input_size = env.observation_space.high.shape[0]
 
 print output_size
@@ -35,9 +38,9 @@ means = np.array(means)
 
 
 # Standard Deviation
-standard_deviation = np.array([1.0] * input_size)
+standard_deviation = np.array([4.0] * input_size)
 
-for batch in range(100):
+for batch in range(1000):
 
     samples = []
     # The batch
@@ -59,7 +62,7 @@ for batch in range(100):
 
         # The game
         while done == False:
-            # env.render()
+            #env.render()
             # Choose action
             action = current_constants * observation
             action = action.sum()
@@ -67,12 +70,11 @@ for batch in range(100):
                 action = 0
             if action > output_size-1:
                 action = output_size-1
-
-            observation, reward, done, info = env.step(int(action))
+            observation, reward, done, info = env.step([action])
 
             observation = np.array(observation)
             total_reward += reward
-        print total_reward
+        #print total_reward
         #print current_constants
         #print standard_deviation
         # saves the most recent sample
@@ -103,9 +105,8 @@ for batch in range(100):
     for index in range(len(standard_deviation)):
         standard_deviation[index] = find_SD(index, largest_samples)
 
-    if standard_deviation[0] == 0:
-        print batch
-        break
+    print batch
+
 
 env.close()
 #gym.upload('/tmp/mountaincar-cross-entropy-1', api_key='sk_4cMtKbiGR8SWoX3rEQnVRw')
