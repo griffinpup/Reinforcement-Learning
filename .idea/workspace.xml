@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db19bfff-a93c-4376-a743-bb648f6e5eba" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GymExperimentation/CartPole GD.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GymExperimentation/GradientDescent.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GymExperimentation/Testing.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GymExperimentation/CrossEntropy.py" afterPath="$PROJECT_DIR$/GymExperimentation/CrossEntropy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GymExperimentation/Karpathy Pong.py" afterPath="$PROJECT_DIR$/GymExperimentation/Karpathy Pong.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GymExperimentation/PongSave.p" afterPath="$PROJECT_DIR$/GymExperimentation/PongSave.p" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GymExperimentation/__init__.py" afterPath="$PROJECT_DIR$/GymExperimentation/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Neural Networks/Naive Neural Network.py" afterPath="$PROJECT_DIR$/Neural Networks/Naive Neural Network.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Neural Networks/RL Neural Network.py" afterPath="$PROJECT_DIR$/Neural Networks/RL Neural Network.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Neural Networks/__init__.py" afterPath="$PROJECT_DIR$/Neural Networks/__init__.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,11 +36,21 @@
       <file leaf-file-name="RL Neural Network.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Neural Networks/RL Neural Network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+            <state relative-caret-position="-474">
+              <caret line="43" column="59" lean-forward="false" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Karpathy Pong.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GymExperimentation/Karpathy Pong.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="606">
+              <caret line="114" column="61" lean-forward="false" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="61" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -442,7 +443,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="130" y="48" width="3710" height="2112" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15498652" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -506,8 +507,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Neural Networks/RL Neural Network.py</url>
-          <line>61</line>
-          <option name="timeStamp" value="211" />
+          <line>46</line>
+          <option name="timeStamp" value="218" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -520,7 +521,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="212" />
+      <option name="time" value="219" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -563,7 +564,7 @@
         <state relative-caret-position="2592">
           <caret line="77" column="58" lean-forward="false" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="58" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -583,7 +584,7 @@
         <state relative-caret-position="2772">
           <caret line="77" column="58" lean-forward="true" selection-start-line="77" selection-start-column="8" selection-end-line="77" selection-end-column="58" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -593,7 +594,7 @@
         <state relative-caret-position="360">
           <caret line="10" column="17" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="17" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -632,7 +633,7 @@
         <state relative-caret-position="180">
           <caret line="10" column="17" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="17" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -671,7 +672,7 @@
         <state relative-caret-position="180">
           <caret line="10" column="17" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="10" selection-end-column="17" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -709,7 +710,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -719,7 +720,7 @@
         <state relative-caret-position="1764">
           <caret line="49" column="31" lean-forward="false" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -729,7 +730,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -739,7 +740,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -879,7 +880,7 @@
         <state relative-caret-position="2376">
           <caret line="66" column="62" lean-forward="false" selection-start-line="66" selection-start-column="12" selection-end-line="66" selection-end-column="62" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -888,14 +889,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
           <caret line="233" column="0" lean-forward="false" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GymExperimentation/Karpathy Pong.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1038">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -915,7 +908,7 @@
         <state relative-caret-position="246">
           <caret line="36" column="16" lean-forward="false" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -938,10 +931,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/GymExperimentation/Karpathy Pong.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="606">
+          <caret line="114" column="61" lean-forward="false" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Neural Networks/RL Neural Network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="-474">
+          <caret line="43" column="59" lean-forward="false" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

@@ -29,7 +29,7 @@ print(env.observation_space)
 
 #Parameters
 batch_size = 3
-node_count = 2
+node_count = 1
 decay_rate = .99
 learning_rate = .001
 #output_size = env.action_space.n
@@ -38,9 +38,11 @@ output_size = 1
 input_size = 1
 batch_count = 0
 
+np.random.seed(1)
 #The two neuron layers,
 # INPUTxNODE_COUNT
 layer1 = 2 * np.random.random((input_size, node_count)) - 1
+
 # NODE_COUNTxOUTPUT
 layer2 = 2 * np.random.random((node_count, output_size)) - 1
 
